@@ -1,0 +1,54 @@
+#!/bin/sh
+#
+# 2018 William Muir <wamuir@gmail.com>
+#
+# This script alters FPDS XSD files to permit validation using lxml
+#
+# 1 Obtain XSD zip (e.g., at https://www.fpds.gov/downloads/V15XSDFiles.zip)
+#   and unzip the file where it will be permanently stored (XSD root directory)
+#
+# 2 Place this script (along with other package contents) in XSD root directory
+#   and execute this script
+#
+# 3 For xmllint test validation of an individual record:
+#
+#   xmllint --schema FPDS/schema/DataCollection/contracts/1.5/Award.xsd \
+#           --noout sample-data/sample-award-1.5.xml
+#
+#   xmllint --schema FPDS/schema/DataCollection/contracts/1.5/IDV.xsd \
+#           --noout sample-data/sample-IDV-1.5.xml
+#
+# 4 For test validation of an FPDS archive using Python3/lxml: [use script]
+#
+# 5 For test validation of an FPDS ATOM feed using Python3/lmxl: [needs work]
+#
+
+
+for i in `find . -name "*.xsd"`
+do
+
+    # Organization.xsd includes a deprecated namespace
+    
+    a1='http://www.fpdsng.com/FPDS'
+    a2='https://www.fpds.gov/FPDS'
+
+
+    # GovernmentOffice.xsd uses a path inconsisntent with the zip structure
+
+    b1='schemaLocation="https://www.fpds.gov/OrganizationalHierarchy/schema/Organization/'
+    b2='schemaLocation="https://www.fpds.gov/FPDS/OrganizationalHierarchy/Organization/'
+
+
+    # It seems that lxml won't fetch remote schemas, at least over https
+    # Change path to serve up locally...
+
+    c1='schemaLocation="https://www.fpds.gov/'
+    c2="schemaLocation=\"`pwd`/"
+
+
+    # Read in an XSD, make our changes, write back out
+    
+    sed -i '' -e "s#${a1}#${a2}#g" -e "s#${b1}#${b2}#g" -e "s#${c1}#${c2}#g" "${i}"
+
+done
+
