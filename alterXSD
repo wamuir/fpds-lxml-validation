@@ -1,6 +1,5 @@
 #!/bin/sh
 #
-# 2018 William Muir <wamuir@gmail.com>
 #
 # This script alters FPDS XSD files to permit validation using lxml
 #
