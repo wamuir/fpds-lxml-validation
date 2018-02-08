@@ -1,0 +1,6 @@
+#!/bin/sh
+
+trang -I rnc -O rng ../RelaxNG/rfc4287-FPDS.rnc ../RelaxNG/rfc4287-FPDS.rng
+
+xmllint -noout -relaxng ../RelaxNG/rfc4287-FPDS.rng ../sample-data/sample-feed.xml
+

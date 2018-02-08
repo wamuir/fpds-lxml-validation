@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 #
-# This script alters FPDS XSD files to permit validation using lxml
+# This script alters FPDS's W3C XML schema (XSD) to permit validation via lxml
 #
 # 1 Obtain XSD zip (e.g., at https://www.fpds.gov/downloads/V15XSDFiles.zip)
 #   and unzip the file where it will be permanently stored (XSD root directory)
@@ -17,9 +17,9 @@
 #   xmllint --schema FPDS/schema/DataCollection/contracts/1.5/IDV.xsd \
 #           --noout sample-data/sample-IDV-1.5.xml
 #
-# 4 For test validation of an FPDS archive using Python3/lxml: [use script]
+# 4 For test validation of FPDS archives using Python3/lxml:
 #
-# 5 For test validation of an FPDS ATOM feed using Python3/lmxl: [needs work]
+#  [see Python3 script at tests/valtest-archives.py]
 #
 
 
