@@ -5,7 +5,7 @@ from lxml import etree
 import rnc2rng
 
 
-''' lxml validation of FPDS ATOM feed using Relax NG XML syntax as input ''' 
+''' lxml validation of FPDS ATOM feed w/ Relax NG XML syntax (trang) input ''' 
 
 with open("../RelaxNG/rfc4287-FPDS.rng", "rb") as f1:
     rng = f1.read()
@@ -18,6 +18,18 @@ with open("../sample-data/sample-feed.xml", "rb") as f2:
 print(xmltree.relaxng(schema))
 
 
-''' lxml validation of FPDS ATOM feed using Relax NG compact syntax as input '''
+''' lxml validation of FPDS ATOM feed w/ Relax NG compact syntax as input '''
 
-# Needs work
+with open("../RelaxNG/rfc4287-FPDS.rnc", "r") as f1:
+    rnc = rnc2rng.loads(f1.read())
+    rng = rnc2rng.dumps(rnc)
+
+with open("../sample-data/sample-feed.xml", "rb") as f2:
+    xml = f2.read()
+    xmltree = etree.parse(io.BytesIO(xml))
+
+''' Needs additional work (empty ns, etc.):
+schema = etree.parse(io.BytesIO(rng.encode("utf-8")))
+print(xmltree.relaxng(schema))
+'''
+
