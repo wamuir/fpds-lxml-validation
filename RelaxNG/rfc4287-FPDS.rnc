@@ -16,6 +16,10 @@ atomCommonAttributes =
   attribute xml:lang { atomLanguageTag }?,
   undefinedAttribute*
 
+# Version attribute for deleted feed
+
+atomVersion = attribute version { text }?
+
 # Text Constructs
 
 atomPlainTextConstruct =
@@ -60,6 +64,7 @@ atomFeed =
   ]
   element atom:feed {
      atomCommonAttributes,
+     atomVersion,
      (atomAuthor*
       & atomCategory*
       & atomContributor*

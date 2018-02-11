@@ -27,6 +27,11 @@
       <ref name="undefinedAttribute"/>
     </zeroOrMore>
   </define>
+  <define name="atomVersion">
+    <optional>
+      <attribute name="version"/>
+    </optional>
+  </define>
   <!-- Text Constructs -->
   <define name="atomPlainTextConstruct">
     <ref name="atomCommonAttributes"/>
@@ -87,6 +92,7 @@
         <s:assert test="atom:author or not(atom:entry[not(atom:author)])">An atom:feed must have an atom:author unless all of its atom:entry children have an atom:author.</s:assert>
       </s:rule>
       <ref name="atomCommonAttributes"/>
+      <ref name="atomVersion"/>
       <interleave>
         <zeroOrMore>
           <ref name="atomAuthor"/>
